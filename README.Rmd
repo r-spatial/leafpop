@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# leafpop - Include Tables, Images and Graphs in Leaflet Popups
+# Include Tables, Images and Graphs in Leaflet Popups
 
 [![Travis build status](https://travis-ci.org/r-spatial/leafpop.svg?branch=master)](https://travis-ci.org/r-spatial/leafpop)
 [![monthly](http://cranlogs.r-pkg.org/badges/leafpop)](https://www.rpackages.io/package/leafpop) 
