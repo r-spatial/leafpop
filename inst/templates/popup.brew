@@ -1,0 +1,16 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="lib/popup/popup.css">
+</head>
+
+<body>
+
+<div class="scrollableContainer">
+<table class="popup scrollable" id="popup">
+
+<%=pop%>
+
+</table>
+</div>
+</body>
+</html>

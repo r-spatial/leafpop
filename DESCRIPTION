@@ -1,0 +1,36 @@
+Package: leafpop
+Type: Package
+Title: Include Tables, Images and Graphs in Leaflet Popups
+Version: 0.0.1
+Date: 2019-04-05
+Authors@R: 
+    c(person(given = "Tim",
+             family = "Appelhans",
+             role = c("cre", "aut"),
+             email = "tim.appelhans@gmail.com"),
+      person(given = "Florian",
+             family = "Detsch",
+             role = "aut",
+             email = "fdetsch@web.de"))
+Maintainer: Tim Appelhans <tim.appelhans@gmail.com>
+Description: Creates HTML strings to embed tables, images or graphs in popups
+  of interactive maps created with packages 'leaflet' or 'mapview'. Handles
+  local paths to images on the file system or remote urls. Handles graphs created 
+  with 'base' graphics, 'lattice' or 'ggplot2' as well as interactive plots created 
+  with 'htmlwidgets'.
+License: MIT + file LICENSE
+Imports: 
+  base64enc,
+  brew,
+  gdalUtils,
+  htmlwidgets,
+  Rcpp (>= 1.0.0),
+  svglite,
+  uuid
+Suggests:
+  lattice,
+  leaflet (>= 2.0.0),
+  sf,
+  sp
+LinkingTo: Rcpp
+RoxygenNote: 6.1.0
