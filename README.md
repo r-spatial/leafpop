@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# leafpop - Include Tables, Images and Graphs in Leaflet Popups
+# Include Tables, Images and Graphs in Leaflet Popups
 
 [![Travis build
 status](https://travis-ci.org/r-spatial/leafpop.svg?branch=master)](https://travis-ci.org/r-spatial/leafpop)
