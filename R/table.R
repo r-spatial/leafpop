@@ -35,18 +35,15 @@
 #' @rdname popup
 popupTable = function(x, zcol, row.numbers = TRUE, feature.id = TRUE) {
 
-  if (inherits(x, "sfc")) {
-    return(NULL)
-  } else {
-    if (!missing(zcol))
-      x = x[, zcol, drop = FALSE]
-  }
-  brewPopupTable(x, row.numbers = row.numbers, feature.id = feature.id)
+  if (inherits(x, "sfc")) return(NULL)
+
+  brewPopupTable(x, zcol, row.numbers = row.numbers, feature.id = feature.id)
 }
 
 
 # create popup table of attributes
 brewPopupTable = function(x,
+                          zcol,
                           width = 300,
                           height = 300,
                           row.numbers = TRUE,
@@ -54,6 +51,8 @@ brewPopupTable = function(x,
 
   if (inherits(x, "Spatial")) x = x@data
   if (inherits(x, "sf")) x = as.data.frame(x)
+
+  if (!missing(zcol)) x = x[, zcol]
 
   # ensure utf-8 for column names (column content is handled on C++ side)
   colnames(x) = enc2utf8(colnames(x))
