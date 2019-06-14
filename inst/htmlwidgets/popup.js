@@ -1,7 +1,9 @@
-LeafletWidget.methods.imagePopup = function(image, group) {
+LeafletWidget.methods.imagePopup = function(image, group, width, height) {
 
 
   var lay = this.layerManager._groupContainers[group];
+
+//  debugger;
 
   var img = [];
   for (i = 0; i < image.length; i++) {
@@ -12,6 +14,14 @@ LeafletWidget.methods.imagePopup = function(image, group) {
 
   //debugger;
 
-  lay.bindPopup("<image src='" + img + "'>", { maxWidth: 2000 });
+  var imgid = 0;
+  lay.eachLayer(function (layer) {
+    wdth = width[imgid];
+    hght = height[imgid];
+    pop = "<image src='" + img[imgid] + "'" + " height=" + hght + " width=" + wdth + ">";
+    layer.bindPopup(pop, { maxWidth: 2000 });
+    //debugger;
+    imgid += 1;
+  });
 
 };

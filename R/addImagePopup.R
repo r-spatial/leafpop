@@ -29,15 +29,22 @@ addPopupImage = function(map, img, group, width = NULL, height = NULL) {
       height = yx_ratio * width
     } else if (is.null(width)) {
       width = xy_ratio * height
+    } else {
+      width = width
+      height = height
     }
 
     nm = basename(fl)
     fls = file.path(drs, nm)
     invisible(file.copy(fl, file.path(drs, nm)))
 
-    return(nm)
+    return(list(nm = nm, width = width, height = height))
 
   })
+
+  image = lapply(pngs, "[[", "nm")
+  width = lapply(pngs, "[[", "width")
+  height = lapply(pngs, "[[", "height")
 
   map$dependencies <- c(
     map$dependencies,
@@ -54,7 +61,7 @@ addPopupImage = function(map, img, group, width = NULL, height = NULL) {
         "image",
         "0.0.1",
         drs,
-        attachment = unlist(pngs)
+        attachment = unlist(image)
       )
     )
   )
@@ -63,7 +70,9 @@ addPopupImage = function(map, img, group, width = NULL, height = NULL) {
     map,
     leaflet::getMapData(map),
     'imagePopup',
-    pngs,
-    group
+    image,
+    group,
+    width,
+    height
   )
 }
