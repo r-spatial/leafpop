@@ -18,8 +18,10 @@ LeafletWidget.methods.imagePopup = function(image, group, width, height) {
   lay.eachLayer(function (layer) {
     wdth = width[imgid];
     hght = height[imgid];
-    pop = "<image src='" + img[imgid] + "'" + " height=" + hght + " width=" + wdth + ">";
-    layer.bindPopup(pop, { maxWidth: 2000 });
+    if (imgid <= image.length) {
+      pop = "<image src='" + img[imgid] + "'" + " height=" + hght + " width=" + wdth + ">";
+      layer.bindPopup(pop, { maxWidth: 2000 });
+    }
     //debugger;
     imgid += 1;
   });
