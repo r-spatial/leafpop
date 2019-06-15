@@ -1,4 +1,4 @@
-LeafletWidget.methods.imagePopup = function(image, group, width, height) {
+LeafletWidget.methods.imagePopup = function(image, group, width, height, src) {
 
 
   var lay = this.layerManager._groupContainers[group];
@@ -9,7 +9,12 @@ LeafletWidget.methods.imagePopup = function(image, group, width, height) {
   for (i = 0; i < image.length; i++) {
     var id = i + 1;
     id = id.toString();
-    img[i] = document.getElementById("image" + "-" + id + "-attachment").href;
+    if (src[i] === "l") {
+      img[i] = document.getElementById("image" + "-" + id + "-attachment").href;
+    }
+    if (src[i] === "r") {
+      img[i] = image[i];
+    }
   }
 
   //debugger;
