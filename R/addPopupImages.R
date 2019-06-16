@@ -1,4 +1,4 @@
-addPopupImage = function(map, img, group, width = NULL, height = NULL) {
+addPopupImages = function(map, img, group, width = NULL, height = NULL) {
 
   drs = file.path(tempdir(), "images")
   if (!dir.exists(drs)) dir.create(drs)
@@ -7,17 +7,16 @@ addPopupImage = function(map, img, group, width = NULL, height = NULL) {
 
     fl = img[[i]]
 
-    # info = strsplit(
-    #   sf::gdal_utils(
-    #     util = "info",
-    #     source = fl,
-    #     quiet = TRUE
-    #   ),
-    #   split = "\n"
-    # )
     if (file.exists(fl)) {
       src = "l"
-      info = sapply(fl, function(...) gdalUtils::gdalinfo(...))
+      info = strsplit(
+        sf::gdal_utils(
+          util = "info",
+          source = fl,
+          quiet = TRUE
+        ),
+        split = "\n"
+      )
       info = unlist(lapply(info, function(i) grep(utils::glob2rx("Size is*"), i, value = TRUE)))
       cols = as.numeric(strsplit(gsub("Size is ", "", info), split = ", ")[[1]])[1]
       rows = as.numeric(strsplit(gsub("Size is ", "", info), split = ", ")[[1]])[2]
@@ -53,7 +52,7 @@ addPopupImage = function(map, img, group, width = NULL, height = NULL) {
   image = lapply(pngs, "[[", "nm")
   names(image) = basename(tools::file_path_sans_ext(img))
   name = names(image)
-  local_images = image[file.exists(img)]
+  local_images = image[file.exists(unlist(img))]
   width = lapply(pngs, "[[", "width")
   height = lapply(pngs, "[[", "height")
   src = lapply(pngs, "[[", "src")
@@ -84,9 +83,9 @@ addPopupImage = function(map, img, group, width = NULL, height = NULL) {
   img_dep_id = img_dep_id[!is.na(img_dep_id)]
   if (length(img_dep_id) > 1) {
     map$dependencies[[img_dep_id[1]]] =
-      modifyList(map$dependencies[[img_dep_id[1]]],
-                 map$dependencies[[img_dep_id[2]]],
-                 keep.null = TRUE)
+      utils::modifyList(map$dependencies[[img_dep_id[1]]],
+                        map$dependencies[[img_dep_id[2]]],
+                        keep.null = TRUE)
     map$dependencies[[img_dep_id[2]]] = map$dependencies[[img_dep_id[1]]]
   }
   map$dependencies = map$dependencies[!duplicated(map$dependencies)]
