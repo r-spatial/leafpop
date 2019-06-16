@@ -25,7 +25,7 @@ addPopupImage = function(map, img, group, width = NULL, height = NULL) {
       xy_ratio = cols / rows
 
       if (is.null(height) && is.null(width)) {
-        width = 300
+        width = cols
         height = yx_ratio * width
       } else if (is.null(height)) {
         height = yx_ratio * width
@@ -51,7 +51,8 @@ addPopupImage = function(map, img, group, width = NULL, height = NULL) {
   })
 
   image = lapply(pngs, "[[", "nm")
-  names(image) = 1:length(image)
+  names(image) = basename(tools::file_path_sans_ext(img))
+  name = names(image)
   local_images = image[file.exists(img)]
   width = lapply(pngs, "[[", "width")
   height = lapply(pngs, "[[", "height")
@@ -77,6 +78,19 @@ addPopupImage = function(map, img, group, width = NULL, height = NULL) {
     )
   )
 
+  img_dep_id = grep("image", map$dependencies)
+  img_dep_ln = lengths(sapply(map$dependencies[img_dep_id], "[[", "attachment"))
+  img_dep_id = img_dep_id[img_dep_ln > 0]
+  img_dep_id = img_dep_id[!is.na(img_dep_id)]
+  if (length(img_dep_id) > 1) {
+    map$dependencies[[img_dep_id[1]]] =
+      modifyList(map$dependencies[[img_dep_id[1]]],
+                 map$dependencies[[img_dep_id[2]]],
+                 keep.null = TRUE)
+    map$dependencies[[img_dep_id[2]]] = map$dependencies[[img_dep_id[1]]]
+  }
+  map$dependencies = map$dependencies[!duplicated(map$dependencies)]
+
   leaflet::invokeMethod(
     map,
     leaflet::getMapData(map),
@@ -85,6 +99,7 @@ addPopupImage = function(map, img, group, width = NULL, height = NULL) {
     group,
     width,
     height,
-    src
+    src,
+    as.list(name)
   )
 }
