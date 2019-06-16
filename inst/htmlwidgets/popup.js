@@ -7,8 +7,6 @@ LeafletWidget.methods.imagePopup = function(image, group, width, height, src, na
 
   var img = [];
   for (i = 0; i < image.length; i++) {
-    var id = i + 1;
-    id = id.toString();
     if (src[i] === "l") {
       if (name.length === 1) {
         img[i] = document.getElementById("image" + "-" + name + "-attachment").href;
