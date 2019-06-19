@@ -81,7 +81,12 @@ brewPopupTable = function(x,
         # }
       }
 
-      mat = df2String(x)
+      # data to character matrix
+      mat = as.matrix(x)
+      attr(mat, "dimnames") = NULL
+      if (!inherits(mat[1], "character")) {
+        mat[1] = as.character(mat[1])
+      }
     }
 
     colnames(mat) = names(x)

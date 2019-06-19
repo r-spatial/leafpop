@@ -256,24 +256,3 @@ StringVector listPopupTemplates(CharacterMatrix x, CharacterVector names,
 //   brewPopupRowAltC("price", 23.75)
 // )
 // */
-
-////////////////////////////////////////////////////////////////////////////////
-// convert all columns in a data.frame to 'character'///////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-// [[Rcpp::export]]
-CharacterMatrix df2String(DataFrame x) {
-
-  int nCols = x.size();
-  CharacterVector chContents = as<CharacterVector>(x[1]);
-
-  int nRows = chContents.size();
-  CharacterMatrix chOut(nRows, nCols);
-
-  for (int i = 0; i < nCols; i++) {
-    chContents = as<CharacterVector>(x[i]);
-    chOut(_, i) = chContents;
-  }
-
-  return chOut;
-}

@@ -96,17 +96,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// df2String
-CharacterMatrix df2String(DataFrame x);
-RcppExport SEXP _leafpop_df2String(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< DataFrame >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(df2String(x));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_leafpop_gsubC", (DL_FUNC) &_leafpop_gsubC, 3},
@@ -116,7 +105,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_leafpop_mergePopupRows", (DL_FUNC) &_leafpop_mergePopupRows, 3},
     {"_leafpop_createTemplate", (DL_FUNC) &_leafpop_createTemplate, 1},
     {"_leafpop_listPopupTemplates", (DL_FUNC) &_leafpop_listPopupTemplates, 4},
-    {"_leafpop_df2String", (DL_FUNC) &_leafpop_df2String, 1},
     {NULL, NULL, 0}
 };
 

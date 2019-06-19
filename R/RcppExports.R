@@ -29,7 +29,3 @@ listPopupTemplates <- function(x, names, tmpPath, rowIndex) {
     .Call(`_leafpop_listPopupTemplates`, x, names, tmpPath, rowIndex)
 }
 
-df2String <- function(x) {
-    .Call(`_leafpop_df2String`, x)
-}
-
