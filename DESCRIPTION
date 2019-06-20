@@ -33,4 +33,4 @@ Suggests:
   leaflet (>= 2.0.0),
   sp
 LinkingTo: Rcpp
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1

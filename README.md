@@ -42,7 +42,7 @@ leaflet() %>%
 
 ![](man/figures/README-table.png)
 
-#### popupImage
+#### addPopupImages & popupImage
 
 ``` r
 library(sf)
@@ -56,10 +56,23 @@ img = "http://bit.ly/1TVwRiR"
 
 leaflet() %>%
   addTiles() %>%
-  addCircleMarkers(data = pnt, popup = popupImage(img, src = "remote"))
+  addCircleMarkers(data = pnt, group = "pnt") %>%
+  addPopupImages(img, group = "pnt")
 ```
 
 ![](man/figures/README-image.png)
+
+Alternatively you can bind the images directly in in the `add*` call,
+however, this will not include the images when the map is saved using
+`mapshot` or `saveWidget`. This options is basically available for
+backward compatibility only.
+
+``` r
+
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(data = pnt, popup = popupImage(img, src = "remote"))
+```
 
 #### popupGraph
 
@@ -76,10 +89,23 @@ p2 = levelplot(t(volcano), col.regions = terrain.colors(100))
 
 leaflet() %>%
   addTiles() %>%
-  addCircleMarkers(data = pnt, popup = popupGraph(p2, width = 300, height = 400))
+  addCircleMarkers(data = pnt, group = "pnt") %>%
+  addPopupGraphs(list(p2), group = "pnt", width = 300, height = 400)
 ```
 
 ![](man/figures/README-graph.png)
+
+Alternatively you can bind the graphs directly in in the `add*` call,
+however, this will not include the graphs when the map is saved using
+`mapshot` or `saveWidget`. This options is basically available for
+backward compatibility only.
+
+``` r
+
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(data = pnt, popup = popupGraph(p2, width = 300, height = 400))
+```
 
 #### Further examples
 
