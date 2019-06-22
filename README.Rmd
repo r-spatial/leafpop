@@ -37,6 +37,13 @@ You can install the released version of `leafpop` from [CRAN](https://CRAN.R-pro
 install.packages("leafpop")
 ```
 
+Or the development version from GitHub:
+
+```{r, eval=FALSE}
+# install.packages("devtools")
+devtools::install_github("r-spatial/leafpop")
+```
+
 ## Examples
 
 #### popupTable
