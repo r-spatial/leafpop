@@ -1,6 +1,5 @@
 LeafletWidget.methods.imagePopup = function(image, group, width, height, src, name) {
 
-
   var lay = this.layerManager._groupContainers[group];
 
   //debugger;
@@ -43,6 +42,49 @@ LeafletWidget.methods.imagePopup = function(image, group, width, height, src, na
     }
     //debugger;
     imgid += 1;
+  });
+
+};
+
+
+
+LeafletWidget.methods.iframePopup = function(source, group, width, height, src, name) {
+
+  var lay = this.layerManager._groupContainers[group];
+
+  //debugger;
+
+  var frm = [];
+  for (i = 0; i < source.length; i++) {
+    if (src[i] === "l") {
+      if (name.length === 1) {
+        frm[i] = document.getElementById("iframe" + "-" + name + "-attachment").href;
+      } else {
+        frm[i] = document.getElementById("iframe" + "-" + name[i] + "-attachment").href;
+      }
+    }
+    if (src[i] === "r") {
+      frm[i] = source[i];
+    }
+  }
+
+   //debugger;
+
+  var srcid = 0;
+  lay.eachLayer(function (layer) {
+    wdth = width;
+    hght = height;
+    if (srcid <= source.length) {
+      pop = "<iframe src='" +
+        frm[srcid] +
+        "' frameborder=0 width=" + wdth +
+        " height=" + hght +
+        "></iframe>";
+
+      layer.bindPopup(pop, { maxWidth: 2000 });
+    }
+    //debugger;
+    srcid += 1;
   });
 
 };
