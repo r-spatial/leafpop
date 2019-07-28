@@ -59,8 +59,7 @@
 #' @rdname addPopupImages
 addPopupImages = function(map, image, group, width = NULL, height = NULL) {
 
-  drs = file.path(tempdir(), "images")
-  if (!dir.exists(drs)) dir.create(drs)
+  drs = createTempFolder("images")
 
   pngs = lapply(1:length(image), function(i) {
 

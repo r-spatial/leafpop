@@ -1,7 +1,6 @@
 addPopupIframes = function(map, source, group, width = 300, height = 300) {
 
-  drs = file.path(tempdir(), "iframes")
-  if (!dir.exists(drs)) dir.create(drs)
+  drs = createTempFolder("iframes")
 
   srcs = lapply(1:length(source), function(i) {
 
@@ -14,6 +13,16 @@ addPopupIframes = function(map, source, group, width = 300, height = 300) {
       nm = basename(fl)
       fls = file.path(drs, nm)
       invisible(file.copy(fl, file.path(drs, nm)))
+      from_dir = paste0(tools::file_path_sans_ext(fl), "_files")
+      if (dir.exists(from_dir)) {
+        invisible(
+          file.copy(
+            from = from_dir,
+            to = drs,
+            recursive = TRUE
+          )
+        )
+      }
     } else {
       src = "r"
       nm = fl
