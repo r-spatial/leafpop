@@ -23,3 +23,25 @@ A \code{leaflet} map.
 \description{
 Add video popups to leaflet layers.
 }
+\examples{
+if (interactive()) {
+  library(leafpop)
+  library(leaflet)
+  library(sf)
+
+  brew1 = st_as_sf(breweries91)[1, ]
+
+  m = leaflet() \%>\%
+    addTiles() \%>\%
+    addCircleMarkers(data = brew1, group = "brew1")
+
+ vid_file = "https://www.tylermw.com/wp-content/uploads/2018/06/bigmeadweb2.mp4"
+ vid = tempfile(fileext = ".mp4")
+ download.file(vid_file, vid)
+
+ m \%>\%
+   addPopupVideos(vid, group = "brew1")
+
+}
+
+}

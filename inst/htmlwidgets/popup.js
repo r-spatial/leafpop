@@ -54,42 +54,68 @@ LeafletWidget.methods.videoPopup = function(video, group, width, height, name) {
   //debugger;
 
   var vdo = [];
-  var vid = [];
-
-  for (i = 0; i < video.length; i++) {
-    if (name.length === 1) {
-      vdo[i] = document.getElementById("video" + "-" + name + "-attachment").href;
-    } else {
-      vdo[i] = document.getElementById("video" + "-" + name[i] + "-attachment").href;
-    }
-
-    vid[i] = document.createElement('video');
-    vid[i].src = vdo[i];
-
-    if (width[i] === null & height[i] === null) {
-      width[i] = vid[i].videoWidth;
-      height[i] = vid[i].videoHeight;
-    } else if (width[i] === null) {
-      xy_ratio = vid[i].videoWidth / vid[i].videoHeight;
-      width[i] = xy_ratio * height[i];
-    } else if (height[i] === null) {
-      xy_ratio = vid[i].videoHeight / vid[i].videoWidth;
-      height[i] = xy_ratio * width[i];
-    }
-  }
-
-  //debugger;
-
+  //var vid = [];
+  //var wdth = [];
+  //var hght = [];
   var vdoid = 0;
+
   lay.eachLayer(function (layer) {
-    wdth = width[vdoid];
-    hght = height[vdoid];
-    if (vdoid <= video.length) {
-      pop = "<video controls src='" + vid[vdoid].src + "'" + " height=" + hght + " width=" + wdth + ">";
-      layer.bindPopup(pop, { maxWidth: 2000 });
+
+    if (name.length === 1) {
+      vdo[vdoid] = document.getElementById("video" + "-" + name + "-attachment").href;
+    } else {
+      vdo[vdoid] = document.getElementById("video" + "-" + name[vdoid] + "-attachment").href;
+    }
+
+    //vid[vdoid] = document.createElement('video');
+    var vid = document.createElement('video');
+    var id = 'leafpop-video' + vdoid;
+    vid.setAttribute('id', id);
+    vid.src = vdo[vdoid];
+    vid.controls = true;
+/*
+    if (width[vdoid] === null & height[vdoid] === null) {
+      wdth = vid[vdoid].videoWidth;
+      hght = vid[vdoid].videoHeight;
+    } else if (width[vdoid] === null) {
+      xy_ratio = vid[vdoid].videoWidth / vid[vdoid].videoHeight;
+      wdth = xy_ratio * height[vdoid];
+      hght = height[vdoid];
+    } else if (height[vdoid] === null) {
+      xy_ratio = vid[vdoid].videoHeight / vid[vdoid]  .videoWidth;
+      hght = xy_ratio * width[vdoid];
+      wdth = width[vdoid];
+    }
+*/
+
+    var wdth;
+    var hght;
+    var xy_ratio = vid.videoWidth / vid.videoHeight;
+    var yx_ratio = vid.videoHeight / vid.videoWidth;
+
+    debugger;
+
+    if (width[vdoid] !== null) {
+      wdth = width[vdoid];
+      hght = vid.videoWidth * yx_ratio;
+    } else if (height[vdoid] !== null ) {
+      hght = height[vdoid];
+      wdth = vid.videoHeight * xy_ratio;
+    } else {
+      wdth = vid.videoWidth;
+      hght = vid.videoHeight;
+    }
+
+    vid.setAttribute('width', wdth);
+    vid.setAttribute('height', hght);
+
+    if (vdoid <= video.length - 1) {
+      //pop = "<video controls src='" + vdo[vdoid] + "'" + " height=" + height[vdoid] + " width=" + width[vdoid] + ">";
+      layer.bindPopup(vid, { width: wdth, height: hght, maxWidth: 2000 });
+      vdoid += 1;
     }
     //debugger;
-    vdoid += 1;
+    //if (vdoid < name.length) { vdoid += 1 }
   });
 
 };

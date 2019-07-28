@@ -9,13 +9,33 @@
 #' @return
 #' A \code{leaflet} map.
 #'
+#' @examples
+#' if (interactive()) {
+#'   library(leafpop)
+#'   library(leaflet)
+#'   library(sf)
+#'
+#'   brew1 = st_as_sf(breweries91)[1, ]
+#'
+#'   m = leaflet() %>%
+#'     addTiles() %>%
+#'     addCircleMarkers(data = brew1, group = "brew1")
+#'
+#'  vid_file = "https://www.tylermw.com/wp-content/uploads/2018/06/bigmeadweb2.mp4"
+#'  vid = tempfile(fileext = ".mp4")
+#'  download.file(vid_file, vid)
+#'
+#'  m %>%
+#'    addPopupVideos(vid, group = "brew1")
+#'
+#' }
+#'
 #' @export addPopupVideos
 #' @name addPopupVideos
 #' @rdname addPopupVideos
 addPopupVideos = function(map, video, group, width = NULL, height = NULL) {
 
-  drs = file.path(tempdir(), "videos")
-  if (!dir.exists(drs)) dir.create(drs)
+  drs = createTempFolder("videos")
 
   vdos = lapply(1:length(video), function(i) {
 
