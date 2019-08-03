@@ -7,7 +7,7 @@ listPopupTemplatesR = function(x, names, row_index = TRUE) {
   if (any(id_crd)) {
     out[, id_crd] = brewPopupCoordsR(names[id_crd], x[, id_crd])
   }
-  out[, id_val] = matrix(brewPopupRowR(which(id_val), names[id_val], t(x[, id_val]) # test for 1-column
+  out[, id_val] = matrix(brewPopupRowR(which(id_val), names[id_val], t(x[, id_val])
                                        , row_index)
                          , ncol = sum(id_val), byrow = TRUE)
 

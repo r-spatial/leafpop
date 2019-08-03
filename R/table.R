@@ -101,10 +101,12 @@ brewPopupTable = function(x,
   ## create list with row-specific html code
   cols = colnames(mat)
 
-  lst_html = listPopupTemplates(mat, cols,
-                                system.file("templates/popup.brew",
-                                            package = "leafpop"),
-                                rowIndex = row.numbers)
+  # lst_html = listPopupTemplates(mat, cols,
+  #                               system.file("templates/popup.brew",
+  #                                           package = "leafpop"),
+  #                               rowIndex = row.numbers)
+  lst_html = listPopupTemplatesR(mat, cols,
+                                 row_index = row.numbers)
   attr(lst_html, "popup") = "leafpop"
   return(lst_html)
 }
