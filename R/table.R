@@ -99,46 +99,7 @@ brewPopupTable = function(x,
   }
 
   ## create list with row-specific html code
-  cols = colnames(mat)
-
-  # lst_html = listPopupTemplates(mat, cols,
-  #                               system.file("templates/popup.brew",
-  #                                           package = "leafpop"),
-  #                               rowIndex = row.numbers)
-  lst_html = listPopupTemplatesR(mat, cols,
-                                 row_index = row.numbers)
+  lst_html = listPopupTemplates(mat, row_index = row.numbers)
   attr(lst_html, "popup") = "leafpop"
   return(lst_html)
-}
-
-
-# create popup table odd row for sp objects -------------------------------
-
-brewPopupRow = function(col.name, value) {
-
-  paste0("<tr>",
-         paste0("<td>",
-                col.name,
-                "</td>"),
-         paste0("<td>",
-                value,
-                "</td>"),
-         "</tr>")
-
-}
-
-
-# create popup table even row for sp objects ------------------------------
-
-brewPopupRowAlt = function(col.name, value) {
-
-  paste0("<tr class='alt'>",
-         paste0("<td>",
-                col.name,
-                "</td>"),
-         paste0("<td>",
-                value,
-                "</td>"),
-         "</tr>")
-
 }

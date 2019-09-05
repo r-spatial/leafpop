@@ -1,24 +1,27 @@
-listPopupTemplatesR = function(x, names, row_index = TRUE) {
+listPopupTemplates = function(x, row_index = TRUE) {
 
-  id_crd = names == "Feature ID"
+  nms = colnames(x)
+  id_crd = nms == "Feature ID"
   id_val = !id_crd
 
-  out = setNames(data.frame(matrix(ncol = ncol(x), nrow = nrow(x))), names)
+  out = data.frame(matrix(ncol = ncol(x), nrow = nrow(x)))
+  colnames(out) = nms
   if (any(id_crd)) {
-    out[, id_crd] = brewPopupCoordsR(names[id_crd], x[, id_crd])
+    out[, id_crd] = brewPopupCoords(nms[id_crd], x[, id_crd])
   }
-  out[, id_val] = matrix(brewPopupRowR(which(id_val), names[id_val], t(x[, id_val])
-                                       , row_index)
+  out[, id_val] = matrix(brewPopupRow(which(id_val), nms[id_val], t(x[, id_val])
+                                      , row_index)
                          , ncol = sum(id_val), byrow = TRUE)
 
   args = c(out, sep = "")
   out = do.call(paste, args)
 
-  vsub = Vectorize(gsub)
-  as.character(vsub("<%=pop%>", out, createTemplateR()))
+  as.character(vsub("<%=pop%>", out, createTemplate()))
 }
 
-brewPopupCoordsR = function(colname, value) {
+vsub = Vectorize(gsub)
+
+brewPopupCoords = function(colname, value) {
   ind_string = "<td></td>"
   col_string = paste0("<td><b>", colname, "</b></td>")
   val_string = paste0("<td align='right'>", value, "&emsp;</td>")
@@ -27,7 +30,7 @@ brewPopupCoordsR = function(colname, value) {
   return(out_string)
 }
 
-brewPopupRowR = function(index, colname, value, row_index = TRUE) {
+brewPopupRow = function(index, colname, value, row_index = TRUE) {
   ind_string = if (row_index) {
     paste0("<td>", index - 1, "</td>")
   } else {
@@ -42,7 +45,7 @@ brewPopupRowR = function(index, colname, value, row_index = TRUE) {
   return(out_string)
 }
 
-createTemplateR = function() {
+createTemplate = function() {
   gsub("\\n", ""
        , '<html>
 <head>
