@@ -3,7 +3,6 @@
 export(popupGraph)
 export(popupImage)
 export(popupTable)
-import(Rcpp)
 import(base64enc)
 import(brew)
 import(htmltools)
@@ -14,5 +13,3 @@ import(uuid)
 importFrom(grDevices,dev.off)
 importFrom(grDevices,png)
 importFrom(utils,glob2rx)
-useDynLib(leafpop, .registration = TRUE)
-
