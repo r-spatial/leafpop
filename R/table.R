@@ -81,7 +81,12 @@ brewPopupTable = function(x,
         # }
       }
 
-      mat = df2String(x)
+      # data to character matrix
+      mat = as.matrix(x)
+      attr(mat, "dimnames") = NULL
+      if (!inherits(mat[1], "character")) {
+        mat[1] = as.character(mat[1])
+      }
     }
 
     colnames(mat) = names(x)
@@ -94,44 +99,7 @@ brewPopupTable = function(x,
   }
 
   ## create list with row-specific html code
-  cols = colnames(mat)
-
-  lst_html = listPopupTemplates(mat, cols,
-                                system.file("templates/popup.brew",
-                                            package = "leafpop"),
-                                rowIndex = row.numbers)
+  lst_html = listPopupTemplates(mat, row_index = row.numbers)
   attr(lst_html, "popup") = "leafpop"
   return(lst_html)
-}
-
-
-# create popup table odd row for sp objects -------------------------------
-
-brewPopupRow = function(col.name, value) {
-
-  paste0("<tr>",
-         paste0("<td>",
-                col.name,
-                "</td>"),
-         paste0("<td>",
-                value,
-                "</td>"),
-         "</tr>")
-
-}
-
-
-# create popup table even row for sp objects ------------------------------
-
-brewPopupRowAlt = function(col.name, value) {
-
-  paste0("<tr class='alt'>",
-         paste0("<td>",
-                col.name,
-                "</td>"),
-         paste0("<td>",
-                value,
-                "</td>"),
-         "</tr>")
-
 }
