@@ -27,6 +27,13 @@ You can install the released version of `leafpop` from
 install.packages("leafpop")
 ```
 
+Or the development version from GitHub:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("r-spatial/leafpop")
+```
+
 ## Examples
 
 #### popupTable
@@ -116,5 +123,6 @@ for further examples.
 ### Code of Conduct
 
 Please note that the ‘leafpop’ project is released with a [Contributor
-Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project
-you agree to abide by its terms.
+Code of
+Conduct](https://github.com/r-spatial/leafpop/blob/master/CODE_OF_CONDUCT.md).
+By participating in this project you agree to abide by its terms.
