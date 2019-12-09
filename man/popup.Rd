@@ -6,8 +6,13 @@
 \alias{popupTable}
 \title{Create HTML strings for popups}
 \usage{
-popupGraph(graphs, type = c("png", "svg", "html"), width = 300,
-  height = 300, ...)
+popupGraph(
+  graphs,
+  type = c("png", "svg", "html"),
+  width = 300,
+  height = 300,
+  ...
+)
 
 popupImage(img, src = c("local", "remote"), embed = FALSE, ...)
 
