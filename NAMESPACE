@@ -2,7 +2,6 @@
 
 export(addPopupGraphs)
 export(addPopupImages)
-export(addPopupVideos)
 export(popupGraph)
 export(popupImage)
 export(popupTable)
