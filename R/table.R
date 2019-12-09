@@ -52,7 +52,7 @@ brewPopupTable = function(x,
   if (inherits(x, "Spatial")) x = x@data
   if (inherits(x, "sf")) x = as.data.frame(x)
 
-  if (!missing(zcol)) x = x[, zcol]
+  if (!missing(zcol)) x = x[, zcol, drop = FALSE]
 
   # ensure utf-8 for column names (column content is handled on C++ side)
   colnames(x) = enc2utf8(colnames(x))
@@ -61,8 +61,9 @@ brewPopupTable = function(x,
     mat = NULL
   } else {
 
+    sf_col = attr(x, "sf_column")
     # data.frame with 1 column
-    if (ncol(x) == 1 && names(x) == attr(x, "sf_column")) {
+    if (ncol(x) == 1 && !is.null(sf_col) && names(x) == sf_col) {
       mat = as.matrix(class(x[, 1])[1])
     } else if (ncol(x) == 1) {
       mat = matrix(as.character(x[, 1]))
