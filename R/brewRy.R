@@ -31,7 +31,7 @@ brewPopupCoords = function(colname, value) {
   # val_string = paste0("<td align='right'>", value, "&emsp;</td>")
   # out_string = paste0("<tr class='coord'>", ind_string, col_string, val_string, "</tr>")
   col_string = sprintf("<th><b>%s&emsp;</b></th>", colname)
-  val_string = sprintf("<td align='right'>%s&emsp;</td>", value)
+  val_string = sprintf("<td>%s&emsp;</td>", value)
   out_string = sprintf("<tr class='coord'>%s%s%s</tr>", ind_string, col_string, val_string)
 
   return(out_string)
