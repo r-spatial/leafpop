@@ -30,7 +30,7 @@ brewPopupCoords = function(colname, value) {
   # col_string = paste0("<td><b>", colname, "</b></td>")
   # val_string = paste0("<td align='right'>", value, "&emsp;</td>")
   # out_string = paste0("<tr class='coord'>", ind_string, col_string, val_string, "</tr>")
-  col_string = sprintf("<td><b>%s</b></td>", colname)
+  col_string = sprintf("<th><b>%s&emsp;</b></th>", colname)
   val_string = sprintf("<td align='right'>%s&emsp;</td>", value)
   out_string = sprintf("<tr class='coord'>%s%s%s</tr>", ind_string, col_string, val_string)
 
@@ -53,11 +53,14 @@ brewPopupRow = function(index, colname, value, row_index = TRUE) {
   } else {
     "<td></td>"
   }
-  col_string = sprintf("<td><b>%s&emsp;</b></td>", colname)
-  val_string = sprintf("<td align='right'>%s&emsp;</td>", value)
+  # col_string = sprintf("<td><b>%s&emsp;</b></td>", colname)
+  # val_string = sprintf("<td align='right'>%s&emsp;</td>", value)
+  col_string = sprintf("<th>%s&emsp;</th>", colname)
+  val_string = sprintf("<td>%s&emsp;</td>", value)
 
-  row_class = paste0("<tr", ifelse(index %% 2 == 0, " class=\'alt\'>%s%s%s</tr>",
-                                   ">%s%s%s</tr>"))
+  # row_class = paste0("<tr", ifelse(index %% 2 == 0, " class=\'alt\'>%s%s%s</tr>",
+  #                                  ">%s%s%s</tr>"))
+  row_class = "<tr>%s%s%s</tr>"
 
   out_string = sprintf(row_class, ind_string, col_string, val_string)
 
@@ -65,22 +68,27 @@ brewPopupRow = function(index, colname, value, row_index = TRUE) {
 }
 
 createTemplate = function() {
-  gsub("\\n", ""
-       , '<html>
-<head>
-<link rel="stylesheet" type="text/css" href="lib/popup/popup.css">
-</head>
-
-<body>
-
-<div class="scrollableContainer">
-<table class="popup scrollable" id="popup">
-
-%s
-
-</table>
-</div>
-</body>
-</html>
-')
+  "<div class='scrollableContainer'><table class='popup scrollable' id='popup'>%s</table></div>"
 }
+
+
+# createTemplate = function() {
+#   gsub("\\n", ""
+#        , "<html>
+# <head>
+# <link rel='stylesheet' type='text/css' href='lib/popup/popup.css'>
+# </head>
+#
+# <body>
+#
+# <div class='scrollableContainer'>
+# <table class='popup scrollable' id='popup'>
+#
+# %s
+#
+# </table>
+# </div>
+# </body>
+# </html>
+# ")
+# }
