@@ -9,12 +9,19 @@ listPopupTemplates = function(x, row_index = TRUE) {
   if (any(id_crd)) {
     out[, id_crd] = brewPopupCoords(nms[id_crd], x[, id_crd])
   }
-  out[, id_val] = matrix(brewPopupRow(which(id_val), nms[id_val], t(x[, id_val])
-                                      , row_index)
-                         , ncol = sum(id_val), byrow = TRUE)
+  out[, id_val] = matrix(
+    brewPopupRow(
+      which(id_val)
+      , nms[id_val]
+      , t(x[, id_val])
+      , row_index
+    )
+    , ncol = sum(id_val)
+    , byrow = TRUE
+  )
 
-  args = c(out, sep = "")
-  out = do.call(paste, args)
+  # args = c(out, sep = "")
+  out = do.call(paste0, out)
 
   # as.character(vsub("<%=pop%>", out, createTemplate(), perl = TRUE))
   sprintf(createTemplate(), out)
@@ -27,8 +34,8 @@ vsub = Vectorize(gsub)
 
 brewPopupCoords = function(colname, value) {
   ind_string = "<td></td>"
-  # col_string = paste0("<td><b>", colname, "</b></td>")
-  # val_string = paste0("<td align='right'>", value, "&emsp;</td>")
+  # col_string = paste0("<th>", colname, "</th>")
+  # val_string = paste0("<td>", value, "&emsp;</td>")
   # out_string = paste0("<tr class='coord'>", ind_string, col_string, val_string, "</tr>")
   col_string = sprintf("<th><b>%s&emsp;</b></th>", colname)
   val_string = sprintf("<td>%s&emsp;</td>", value)
@@ -43,11 +50,10 @@ brewPopupRow = function(index, colname, value, row_index = TRUE) {
   # } else {
   #   "<td></td>"
   # }
-  # col_string = paste0("<td><b>", colname, "&emsp;</b></td>")
-  # val_string = paste0("<td align='right'>", value, "&emsp;</td>")
+  # col_string = paste0("<th>", colname, "&emsp;</th>")
+  # val_string = paste0("<td>", value, "&emsp;</td>")
   #
-  # out_string = paste0("<tr", ifelse(index %% 2 == 0, " class=\'alt\'>", ">")
-  #                     , ind_string, col_string, val_string, "</tr>")
+  # out_string = paste0("<tr>", ind_string, col_string, val_string, "</tr>")
   ind_string = if (row_index) {
     sprintf("<td>%s</td>", index - 1)
   } else {
@@ -58,11 +64,9 @@ brewPopupRow = function(index, colname, value, row_index = TRUE) {
   col_string = sprintf("<th>%s&emsp;</th>", colname)
   val_string = sprintf("<td>%s&emsp;</td>", value)
 
-  # row_class = paste0("<tr", ifelse(index %% 2 == 0, " class=\'alt\'>%s%s%s</tr>",
-  #                                  ">%s%s%s</tr>"))
-  row_class = "<tr>%s%s%s</tr>"
+  # row_class = "<tr>%s%s%s</tr>"
 
-  out_string = sprintf(row_class, ind_string, col_string, val_string)
+  out_string = sprintf("<tr>%s%s%s</tr>", ind_string, col_string, val_string)
 
   return(out_string)
 }

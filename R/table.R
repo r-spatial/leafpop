@@ -86,7 +86,7 @@ brewPopupTable = function(x,
       mat = as.matrix(x)
       attr(mat, "dimnames") = NULL
       if (!inherits(mat[1], "character")) {
-        mat[1] = as.character(mat[1])
+        mat[1, 1] = as.character(mat[1, 1])
       }
     }
 
