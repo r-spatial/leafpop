@@ -127,7 +127,7 @@ addPopupImages = function(map, image, group, width = NULL, height = NULL) {
     ),
     list(
       htmltools::htmlDependency(
-        "image",
+        paste0("image", "-", group),
         "0.0.1",
         drs,
         attachment = local_images
@@ -135,7 +135,7 @@ addPopupImages = function(map, image, group, width = NULL, height = NULL) {
     )
   )
 
-  img_dep_id = grep("image", map$dependencies)
+  img_dep_id = grep(paste0("image", "-", group), map$dependencies)
   img_dep_ln = lengths(sapply(map$dependencies[img_dep_id], "[[", "attachment"))
   img_dep_id = img_dep_id[img_dep_ln > 0]
   img_dep_id = img_dep_id[!is.na(img_dep_id)]

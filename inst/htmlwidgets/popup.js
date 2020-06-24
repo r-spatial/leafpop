@@ -8,9 +8,9 @@ LeafletWidget.methods.imagePopup = function(image, group, width, height, src, na
   for (i = 0; i < image.length; i++) {
     if (src[i] === "l") {
       if (name.length === 1) {
-        img[i] = document.getElementById("image" + "-" + name + "-attachment").href;
+        img[i] = document.getElementById("image" + "-" + group + "-" + name + "-attachment").href;
       } else {
-        img[i] = document.getElementById("image" + "-" + name[i] + "-attachment").href;
+        img[i] = document.getElementById("image" + "-" + group + "-" + name[i] + "-attachment").href;
       }
     }
     if (src[i] === "r") {
