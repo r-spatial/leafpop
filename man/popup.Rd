@@ -16,7 +16,7 @@ popupGraph(
 
 popupImage(img, src = c("local", "remote"), embed = FALSE, ...)
 
-popupTable(x, zcol, row.numbers = TRUE, feature.id = TRUE)
+popupTable(x, zcol, row.numbers = TRUE, feature.id = TRUE, className = NULL)
 }
 \arguments{
 \item{graphs}{A \code{list} of figures associated with \code{x}.}

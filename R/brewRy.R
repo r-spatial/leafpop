@@ -1,4 +1,4 @@
-listPopupTemplates = function(x, row_index = TRUE) {
+listPopupTemplates = function(x, row_index = TRUE, className = NULL) {
 
   nms = colnames(x)
   id_crd = nms == "Feature ID"
@@ -23,8 +23,9 @@ listPopupTemplates = function(x, row_index = TRUE) {
   # args = c(out, sep = "")
   out = do.call(paste0, out)
 
+  if (is.null(className)) className = ""
   # as.character(vsub("<%=pop%>", out, createTemplate(), perl = TRUE))
-  sprintf(createTemplate(), out)
+  sprintf(createTemplate(), className, out)
 
   # vapply(out, gsub, "chracter", x = createTemplate()
   #        , pattern = "<%=pop%>", USE.NAMES = FALSE)
@@ -72,7 +73,7 @@ brewPopupRow = function(index, colname, value, row_index = TRUE) {
 }
 
 createTemplate = function() {
-  "<div class='scrollableContainer'><table class='popup scrollable' id='popup'>%s</table></div>"
+  "<div class='scrollableContainer'><table class=%s id='popup'>%s</table></div>"
 }
 
 

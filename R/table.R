@@ -33,11 +33,21 @@
 #' @export popupTable
 #' @name popupTable
 #' @rdname popup
-popupTable = function(x, zcol, row.numbers = TRUE, feature.id = TRUE) {
+popupTable = function(x,
+                      zcol,
+                      row.numbers = TRUE,
+                      feature.id = TRUE,
+                      className = NULL) {
 
   if (inherits(x, "sfc")) return(NULL)
 
-  brewPopupTable(x, zcol, row.numbers = row.numbers, feature.id = feature.id)
+  brewPopupTable(
+    x
+    , zcol
+    , row.numbers = row.numbers
+    , feature.id = feature.id
+    , className = className
+  )
 }
 
 
@@ -47,7 +57,8 @@ brewPopupTable = function(x,
                           width = 300,
                           height = 300,
                           row.numbers = TRUE,
-                          feature.id = TRUE) {
+                          feature.id = TRUE,
+                          className = NULL) {
 
   if (inherits(x, "Spatial")) x = x@data
   if (inherits(x, "sf")) x = as.data.frame(x)
@@ -100,7 +111,11 @@ brewPopupTable = function(x,
   }
 
   ## create list with row-specific html code
-  lst_html = listPopupTemplates(mat, row_index = row.numbers)
+  lst_html = listPopupTemplates(
+    mat
+    , row_index = row.numbers
+    , className = className
+  )
   attr(lst_html, "popup") = "leafpop"
   return(lst_html)
 }
