@@ -1,3 +1,9 @@
+leafpop 0.0.6
+
+new features:
+
+  * popupTable has gained argument 'className' to append a CSS class name to the table. #9
+
 leafpop 0.0.5
 
 changes:
