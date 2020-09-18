@@ -49,6 +49,9 @@ included in the output popup table. If missing, all columns are displayed.}
 \item{row.numbers}{\code{logical} whether to include row numbers in the popup table.}
 
 \item{feature.id}{\code{logical} whether to add 'Feature ID' entry to popup table.}
+
+\item{className}{CSS class name(s) that can be used to style the table through
+additional css dependencies (see \link[htmltools]{attachDependencies}).}
 }
 \value{
 A \code{list} of HTML strings required to create popup graphs.
