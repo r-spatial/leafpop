@@ -9,12 +9,15 @@ border-collapse: collapse;
 
 
 div.scrollableContainer {
-max-height: 2000px;
-max-width: 2000px;
-overflow-y: auto;
-overflow-x: auto;
-margin: 0px;
-background: transparent;
+  max-height: 2000px;
+  max-width: 2000px;
+	width: <%=width%>px;
+	height: <%=height%>px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  margin: 0px;
+  padding: 0 0 0 0;
+  background: transparent;
 }
 
 
@@ -57,23 +60,33 @@ div::-webkit-scrollbar-corner {
 	text-align: center;
 }
 
+.leaflet-popup-content {
+	margin: 0px 0px 0px 0px;
+	width: <%=width%>px;
+	height: <%=height%>px;
+}
+
 .leaflet-popup-content-wrapper {
-	padding: 1px;
+	background: #ffffff; //#4c4c4c;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+	width: <%=width%>px;
+	height: <%=height%>px;
+	padding: 0px;
 	text-align: left;
 	-webkit-border-radius: 2px;
 	        border-radius: 2px;
 }
 
-.leaflet-popup-content {
+
+.leaflet-popup-content-wrapper.leaflet-popup-content {
 	margin: 0px 0px 0px 0px;
-	overflow-y: hidden;
-	overflow-x: hidden;
 	width: <%=width%>px;
 	height: <%=height%>px;
 }
 
+
 .leaflet-popup-content p {
-	margin: 8px 0;
+	margin: 0px 0;
 }
 
 .leaflet-popup-tip-container {
@@ -100,12 +113,6 @@ div::-webkit-scrollbar-corner {
 	        transform: rotate(45deg);
 }
 
-.leaflet-popup-content-wrapper{
-	background: #ffffff; //#4c4c4c;
-	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
-	width: <%=width%>px;
-	height: <%=height%>px;
-}
 
 .leaflet-popup-tip {
 	background: #ffffff; //#4c4c4c;
@@ -133,7 +140,6 @@ div::-webkit-scrollbar-corner {
 	}
 
 .leaflet-popup-scrolled {
-	overflow: visible;
 	border-bottom: 1px solid #ddd;
 	border-top: 1px solid #ddd;
 	}
