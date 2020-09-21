@@ -179,10 +179,12 @@ leaflet() \%>\%
 library(leaflet)
 
 leaflet() \%>\% addTiles() \%>\% addCircleMarkers(data = breweries91)
+
 leaflet() \%>\%
   addTiles() \%>\%
   addCircleMarkers(data = breweries91,
                    popup = popupTable(breweries91))
+
 leaflet() \%>\%
   addTiles() \%>\%
   addCircleMarkers(data = breweries91,
@@ -190,5 +192,69 @@ leaflet() \%>\%
                                       zcol = c("brewery", "zipcode", "village"),
                                       feature.id = FALSE,
                                       row.numbers = FALSE))
+
+## using a custom css to style the table
+className = "my-popup"
+
+css = list(
+  "background" = "#ff00ff"
+)
+
+css = list(css)
+names(css) = sprintf("table.\%s", className)
+
+evenodd = list("#ffff00", "#00ffff")
+names(evenodd) = rep("background", 2)
+
+evenodd = lapply(evenodd, function(i) {
+  list("background" = i)
+})
+
+names(evenodd) = c(
+  sprintf("table.\%s tr:nth-child(even)", className)
+  , sprintf("table.\%s tr:nth-child(odd)", className)
+)
+
+lst = append(css, evenodd)
+
+jnk = Map(function(...) do.call(htmltools::css, ...), lst)
+
+dir = tempfile()
+dir.create(dir)
+fl = file.path(dir, "myCSS.css")
+
+cat(
+  sprintf(
+    "\%s{ \n  \%s\n}\n\n"
+    , names(jnk)
+    , jnk
+  )
+  , sep = ""
+  , file = fl
+)
+
+mymap = leaflet() \%>\%
+  addTiles() \%>\%
+  addCircleMarkers(data = breweries91,
+                   popup = popupTable(breweries91, className = className))
+
+addMyCSSDependency = function() {
+  list(
+    htmltools::htmlDependency(
+      name = "mycss"
+      , version = "0.0.1"
+      , src = dir
+      , stylesheet = basename(fl)
+    )
+  )
+}
+
+mymap$dependencies = c(
+  mymap$dependencies
+  , addMyCSSDependency()
+)
+
+mymap
+
 
 }
