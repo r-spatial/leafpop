@@ -4,7 +4,7 @@
 \alias{addPopupGraphs}
 \title{Add graph/plot popups to leaflet layers.}
 \usage{
-addPopupGraphs(map, graph, group, width = 300, height = 300)
+addPopupGraphs(map, graph, group, width = 300, height = 300, ...)
 }
 \arguments{
 \item{map}{the \code{leaflet} map to add the popups to.}
@@ -17,6 +17,8 @@ even for a single plot!}
 \item{width}{the width of the graph(s) in pixels.}
 
 \item{height}{the height of the graph(s) in pixels.}
+
+\item{...}{additional arguments passed to \code{\link{addPopupImages}}.}
 }
 \value{
 A \code{leaflet} map.
@@ -28,6 +30,7 @@ Add graph/plot popups to leaflet layers.
 if (interactive()) {
 library(sf)
 library(leaflet)
+library(lattice)
 
 pt = data.frame(x = 174.764474, y = -36.877245)
 pt = st_as_sf(pt, coords = c("x", "y"), crs = 4326)

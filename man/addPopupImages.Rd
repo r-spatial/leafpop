@@ -4,7 +4,7 @@
 \alias{addPopupImages}
 \title{Add image popups to leaflet layers.}
 \usage{
-addPopupImages(map, image, group, width = NULL, height = NULL)
+addPopupImages(map, image, group, width = NULL, height = NULL, tooltip = FALSE)
 }
 \arguments{
 \item{map}{the \code{leaflet} map to add the popups to.}
@@ -17,6 +17,9 @@ web-URL(s) to any sort of image file(s).}
 \item{width}{the width of the image(s) in pixels.}
 
 \item{height}{the height of the image(s) in pixels.}
+
+\item{tooltip}{logical, whether to show image(s) as popup(s) (on click) or
+tooltip(s) (on hover).}
 }
 \value{
 A \code{leaflet} map.
@@ -30,6 +33,7 @@ if (interactive()) {
 ### one image
 library(leaflet)
 library(sf)
+library(lattice)
 
 pnt = st_as_sf(data.frame(x = 174.764474, y = -36.877245),
                 coords = c("x", "y"),

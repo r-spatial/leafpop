@@ -6,6 +6,8 @@
 #' @param group the map group to which the popups should be added.
 #' @param width the width of the image(s) in pixels.
 #' @param height the height of the image(s) in pixels.
+#' @param tooltip logical, whether to show image(s) as popup(s) (on click) or
+#'   tooltip(s) (on hover).
 #'
 #' @return
 #' A \code{leaflet} map.
@@ -16,6 +18,7 @@
 #' ### one image
 #' library(leaflet)
 #' library(sf)
+#' library(lattice)
 #'
 #' pnt = st_as_sf(data.frame(x = 174.764474, y = -36.877245),
 #'                 coords = c("x", "y"),
@@ -57,7 +60,12 @@
 #' @export addPopupImages
 #' @name addPopupImages
 #' @rdname addPopupImages
-addPopupImages = function(map, image, group, width = NULL, height = NULL) {
+addPopupImages = function(map,
+                          image,
+                          group,
+                          width = NULL,
+                          height = NULL,
+                          tooltip = FALSE) {
 
   drs = createTempFolder("images")
 
@@ -157,6 +165,7 @@ addPopupImages = function(map, image, group, width = NULL, height = NULL) {
     width,
     height,
     src,
-    as.list(name)
+    as.list(name),
+    tooltip
   )
 }

@@ -6,6 +6,7 @@
 #' @param group the map group to which the popups should be added.
 #' @param width the width of the graph(s) in pixels.
 #' @param height the height of the graph(s) in pixels.
+#' @param ... additional arguments passed to \code{\link{addPopupImages}}.
 #'
 #' @return
 #' A \code{leaflet} map.
@@ -14,6 +15,7 @@
 #' if (interactive()) {
 #' library(sf)
 #' library(leaflet)
+#' library(lattice)
 #'
 #' pt = data.frame(x = 174.764474, y = -36.877245)
 #' pt = st_as_sf(pt, coords = c("x", "y"), crs = 4326)
@@ -30,7 +32,7 @@
 #' @export addPopupGraphs
 #' @name addPopupGraphs
 #' @rdname addPopupGraphs
-addPopupGraphs = function(map, graph, group, width = 300, height = 300) {
+addPopupGraphs = function(map, graph, group, width = 300, height = 300, ...) {
 
   imgs = lapply(seq_along(graph), function(i) {
     fl = tempfile(fileext = ".png")
@@ -40,5 +42,5 @@ addPopupGraphs = function(map, graph, group, width = 300, height = 300) {
     return(fl)
   })
 
-  addPopupImages(map, imgs, group)
+  addPopupImages(map, imgs, group, ...)
 }

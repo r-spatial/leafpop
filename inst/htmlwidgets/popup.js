@@ -1,4 +1,4 @@
-LeafletWidget.methods.imagePopup = function(image, group, width, height, src, name) {
+LeafletWidget.methods.imagePopup = function(image, group, width, height, src, name, tooltip) {
 
   var lay = this.layerManager._groupContainers[group];
 
@@ -16,15 +16,19 @@ LeafletWidget.methods.imagePopup = function(image, group, width, height, src, na
     if (src[i] === "r") {
       r_img = new Image();
       r_img.src = image[i];
+      var wh = [];
+      r_img.onload = function () {
+        wh = [r_img.width, r_img.height];
+      };
       if (width[i] === null & height[i] === null) {
-        width[i] = r_img.width;
-        height[i] = r_img.height;
+        width[i] = wh[0]; //r_img.width;
+        height[i] = wh[1]; //r_img.height;
       } else if (width[i] === null) {
-        xy_ratio = r_img.width / r_img.height;
-        width[i] = xy_ratio * height[i];
+        xy_ratio = wh[0] / wh[1]; //r_img.width / r_img.height;
+        width[i] = xy_ratio * wh[1]; //height[i];
       } else if (height[i] === null) {
-        xy_ratio = r_img.height / r_img.width;
-        height[i] = xy_ratio * width[i];
+        yx_ratio = wh[1] / wh[0]; //r_img.height / r_img.width;
+        height[i] = yx_ratio * wh[0]; //width[i];
       }
       img[i] = image[i];
     }
@@ -38,7 +42,11 @@ LeafletWidget.methods.imagePopup = function(image, group, width, height, src, na
     hght = height[imgid];
     if (imgid <= image.length) {
       pop = "<image src='" + img[imgid] + "'" + " height=" + hght + " width=" + wdth + ">";
-      layer.bindPopup(pop, { maxWidth: 2000 });
+      if (tooltip === true) {
+        layer.bindTooltip(pop, { maxWidth: 2000 });
+      } else {
+        layer.bindPopup(pop, { maxWidth: 2000 });
+      }
     }
     //debugger;
     imgid += 1;
