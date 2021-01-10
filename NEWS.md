@@ -1,3 +1,9 @@
+## leafpop 0.0.7
+
+new features:
+
+  * popupImages & popupGraphs have gained argument 'tooltip' to show images/graphs on hover. https://twitter.com/TimSalabim3/status/1347865160074072064
+
 ## leafpop 0.0.6
 
 new features:
