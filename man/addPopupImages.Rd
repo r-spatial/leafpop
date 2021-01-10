@@ -4,7 +4,15 @@
 \alias{addPopupImages}
 \title{Add image popups to leaflet layers.}
 \usage{
-addPopupImages(map, image, group, width = NULL, height = NULL, tooltip = FALSE)
+addPopupImages(
+  map,
+  image,
+  group,
+  width = NULL,
+  height = NULL,
+  tooltip = FALSE,
+  ...
+)
 }
 \arguments{
 \item{map}{the \code{leaflet} map to add the popups to.}
@@ -20,6 +28,10 @@ web-URL(s) to any sort of image file(s).}
 
 \item{tooltip}{logical, whether to show image(s) as popup(s) (on click) or
 tooltip(s) (on hover).}
+
+\item{...}{additional options passed on to the JavaScript creator function.
+See \url{https://leafletjs.com/reference-1.7.1.html#popup} &
+\url{https://leafletjs.com/reference-1.7.1.html#tooltip} for details.}
 }
 \value{
 A \code{leaflet} map.

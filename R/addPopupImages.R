@@ -8,6 +8,9 @@
 #' @param height the height of the image(s) in pixels.
 #' @param tooltip logical, whether to show image(s) as popup(s) (on click) or
 #'   tooltip(s) (on hover).
+#' @param ... additional options passed on to the JavaScript creator function.
+#'   See \url{https://leafletjs.com/reference-1.7.1.html#popup} &
+#'   \url{https://leafletjs.com/reference-1.7.1.html#tooltip} for details.
 #'
 #' @return
 #' A \code{leaflet} map.
@@ -65,7 +68,8 @@ addPopupImages = function(map,
                           group,
                           width = NULL,
                           height = NULL,
-                          tooltip = FALSE) {
+                          tooltip = FALSE,
+                          ...) {
 
   drs = createTempFolder("images")
 
@@ -156,6 +160,8 @@ addPopupImages = function(map,
   }
   map$dependencies = map$dependencies[!duplicated(map$dependencies)]
 
+  dotlist = utils::modifyList(list("maxWidth" = 2000), list(...))
+
   leaflet::invokeMethod(
     map,
     leaflet::getMapData(map),
@@ -166,6 +172,7 @@ addPopupImages = function(map,
     height,
     src,
     as.list(name),
-    tooltip
+    tooltip,
+    dotlist
   )
 }

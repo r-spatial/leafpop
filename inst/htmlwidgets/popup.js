@@ -1,4 +1,4 @@
-LeafletWidget.methods.imagePopup = function(image, group, width, height, src, name, tooltip) {
+LeafletWidget.methods.imagePopup = function(image, group, width, height, src, name, tooltip, dotlist) {
 
   var lay = this.layerManager._groupContainers[group];
 
@@ -43,9 +43,9 @@ LeafletWidget.methods.imagePopup = function(image, group, width, height, src, na
     if (imgid <= image.length) {
       pop = "<image src='" + img[imgid] + "'" + " height=" + hght + " width=" + wdth + ">";
       if (tooltip === true) {
-        layer.bindTooltip(pop, { maxWidth: 2000 });
+        layer.bindTooltip(pop, dotlist); //{ maxWidth: 2000 });
       } else {
-        layer.bindPopup(pop, { maxWidth: 2000 });
+        layer.bindPopup(pop, dotlist); //{ maxWidth: 2000 });
       }
     }
     //debugger;
