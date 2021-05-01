@@ -115,7 +115,14 @@ addPopupImages = function(map,
       height = height
     }
 
-    return(list(nm = nm, width = width, height = height, src = src))
+    return(
+      list(
+        nm = nm
+        , width = width
+        , height = height
+        , src = src
+      )
+    )
 
   })
 
@@ -160,7 +167,12 @@ addPopupImages = function(map,
   }
   map$dependencies = map$dependencies[!duplicated(map$dependencies)]
 
-  dotlist = utils::modifyList(list("maxWidth" = 2000), list(...))
+  dotlist = utils::modifyList(
+    list(
+      "maxWidth" = 2000
+    )
+    , list(...)
+  )
 
   leaflet::invokeMethod(
     map,

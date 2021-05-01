@@ -40,6 +40,9 @@ LeafletWidget.methods.imagePopup = function(image, group, width, height, src, na
   lay.eachLayer(function (layer) {
     wdth = width[imgid];
     hght = height[imgid];
+    if (dotlist.minWidth === undefined) {
+      dotlist.minWidth = wdth;
+    }
     if (imgid <= image.length) {
       popimg = "<image src='" + img[imgid] + "'" + " height=" + hght + " width=" + wdth + ">";
       poporig = layer.getPopup();
