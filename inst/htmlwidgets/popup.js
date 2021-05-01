@@ -41,7 +41,14 @@ LeafletWidget.methods.imagePopup = function(image, group, width, height, src, na
     wdth = width[imgid];
     hght = height[imgid];
     if (imgid <= image.length) {
-      pop = "<image src='" + img[imgid] + "'" + " height=" + hght + " width=" + wdth + ">";
+      popimg = "<image src='" + img[imgid] + "'" + " height=" + hght + " width=" + wdth + ">";
+      poporig = layer.getPopup();
+      if (poporig === undefined) {
+        pop = popimg
+      } else {
+        pop = poporig._content + popimg
+      }
+
       if (tooltip === true) {
         layer.bindTooltip(pop, dotlist); //{ maxWidth: 2000 });
       } else {
