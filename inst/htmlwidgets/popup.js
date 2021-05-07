@@ -38,26 +38,56 @@ LeafletWidget.methods.imagePopup = function(image, group, width, height, src, na
 
   var imgid = 0;
   lay.eachLayer(function (layer) {
-    wdth = width[imgid];
-    hght = height[imgid];
-    if (dotlist.minWidth === undefined) {
-      dotlist.minWidth = wdth;
-    }
-    if (imgid <= image.length) {
-      popimg = "<image src='" + img[imgid] + "'" + " height=" + hght + " width=" + wdth + ">";
-      poporig = layer.getPopup();
-      if (poporig === undefined) {
-        pop = popimg
-      } else {
-        pop = poporig._content + popimg
-      }
 
-      if (tooltip === true) {
-        layer.bindTooltip(pop, dotlist); //{ maxWidth: 2000 });
-      } else {
-        layer.bindPopup(pop, dotlist); //{ maxWidth: 2000 });
+    if (layer._singleAddRemoveBuffer === undefined) {
+      wdth = width[imgid];
+      hght = height[imgid];
+      if (dotlist.minWidth === undefined) {
+        dotlist.minWidth = wdth;
+      }
+      if (imgid <= image.length) {
+        popimg = "<image src='" + img[imgid] + "'" + " height=" + hght + " width=" + wdth + ">";
+        poporig = layer.getPopup();
+        if (poporig === undefined) {
+          pop = popimg;
+        } else {
+          pop = poporig._content + popimg;
+        }
+
+        if (tooltip === true) {
+          layer.bindTooltip(pop, dotlist); //{ maxWidth: 2000 });
+        } else {
+          layer.bindPopup(pop, dotlist); //{ maxWidth: 2000 });
+        }
       }
     }
+
+    if (layer._singleAddRemoveBuffer !== undefined) {
+      var arr = layer._singleAddRemoveBuffer;
+      arr.forEach(function(value) {
+        wdth = width[imgid];
+        hght = height[imgid];
+        if (dotlist.minWidth === undefined) {
+          dotlist.minWidth = wdth;
+        }
+        if (imgid <= image.length) {
+          popimg = "<image src='" + img[imgid] + "'" + " height=" + hght + " width=" + wdth + ">";
+        }
+        poporig = value.layer.getPopup();
+          if (poporig === undefined) {
+            pop = popimg;
+          } else {
+            pop = poporig._content + popimg;
+          }
+        if (tooltip === true) {
+            value.layer.bindTooltip(pop, dotlist); //{ maxWidth: 2000 });
+        } else {
+          value.layer.bindPopup(pop, dotlist); //{ maxWidth: 2000 });
+        }
+        imgid += 1;
+      });
+    }
+
     //debugger;
     imgid += 1;
   });
