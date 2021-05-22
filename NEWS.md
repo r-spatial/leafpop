@@ -1,4 +1,4 @@
-## leafpop 0.0.8
+## leafpop 0.1.0 (2021-05-22)
 
 new features:
 
