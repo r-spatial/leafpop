@@ -236,6 +236,10 @@ popupHTMLGraph = function(graphs, dsn = tempdir(),
   lapply(1:length(graphs), function(i) {
     nm = paste0("tmp_", i, ".html")
     fls = file.path(dsn, nm)
+
+    cssTemplate = system.file("templates/popup-style.brew", package = "leafpop")
+    brew::brew(cssTemplate, output = file.path(dsn, "popup-style.css"))
+
     htmlwidgets::saveWidget(graphs[[i]], fls, ...)
 
     rel_path = file.path("..", basename(dsn))
