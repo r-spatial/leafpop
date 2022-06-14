@@ -118,8 +118,8 @@ popupSVGraph = function(graphs, #dsn = tempdir(),
     #nm = paste0("tmp_", i, ".svg")
     #fls = file.path(dsn, nm)
 
-    inch_wdth = width / 72
-    inch_hght = height  / 72
+    inch_wdth = width / 96
+    inch_hght = height  / 96
 
     #svg(filename = fls, width = inch_wdth, height = inch_hght, ...)
     #print(graphs[[i]])
