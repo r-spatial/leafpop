@@ -18,6 +18,7 @@
 #' @param type Output filetype, one of "png" (default), "svg" or "html".
 #' @param width popup width in pixels.
 #' @param height popup height in pixels.
+#' @param selfcontained Whether to save the HTML as a single self-contained file (with external resources base64 encoded) or a file with external resources placed in an adjacent directory. Only for filetype "html"
 #'
 #' @return
 #' A \code{list} of HTML strings required to create popup graphs.
@@ -83,7 +84,7 @@
 #' @importFrom grDevices dev.off png
 #' @importFrom utils glob2rx
 popupGraph = function(graphs, type = c("png", "svg", "html"),
-                      width = 300, height = 300, ...) {
+                      width = 300, height = 300, selfcontained = TRUE, ...) {
 
   ## if a single feature is provided, convert 'graphs' to list
   if (class(graphs)[1] != "list")
@@ -104,7 +105,8 @@ popupGraph = function(graphs, type = c("png", "svg", "html"),
                svg = popupSVGraph(graphs = graphs, dsn = drs,
                                   width = width, height = height, ...),
                html = popupHTMLGraph(graphs = graphs, dsn = drs,
-                                     width = width, height = height, ...))
+                                     width = width, height = height,
+                                     selfcontained = selfcontained, ...))
 
   # attr(pop, "popup") = "mapview"
   return(pop)
@@ -232,11 +234,25 @@ popupPNGraph = function(graphs, dsn = tempdir(),
 
 ### html -----
 popupHTMLGraph = function(graphs, dsn = tempdir(),
-                          width = 300, height = 300, ...) {
+                          width = 300, height = 300, selfcontained = FALSE, ...) {
   lapply(1:length(graphs), function(i) {
     nm = paste0("tmp_", i, ".html")
     fls = file.path(dsn, nm)
-    htmlwidgets::saveWidget(graphs[[i]], fls, ...)
+
+    cssTemplate = system.file("templates/popup-style.brew", package = "leafpop")
+    brew::brew(cssTemplate, output = file.path(dsn, "popup-style.css"))
+
+    if (!selfcontained) {
+      htmlwidgets::saveWidget(
+        graphs[[i]],
+        fls,
+        selfcontained = FALSE,
+        libdir = file.path(dsn, "js"),
+        ...
+        )
+    } else {
+      htmlwidgets::saveWidget(graphs[[i]], fls, selfcontained = TRUE, ...)
+    }
 
     rel_path = file.path("..", basename(dsn))
 
