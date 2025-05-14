@@ -129,7 +129,7 @@ brewPopupTable = function(x,
                           className = NULL) {
 
   if (inherits(x, "Spatial")) x = x@data
-  if (inherits(x, "sf")) x = as.data.frame(x)
+  if (inherits(x, "sf") || inherits(x, "SpatVector")) x = as.data.frame(x)
 
   if (!missing(zcol)) x = x[, zcol, drop = FALSE]
 
