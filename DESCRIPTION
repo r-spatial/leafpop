@@ -1,6 +1,6 @@
 Package: leafpop
 Title: Include Tables, Images and Graphs in Leaflet Pop-Ups
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: 
     c(person(given = "Tim",
              family = "Appelhans",
