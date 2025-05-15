@@ -33,4 +33,4 @@ Suggests:
   lattice,
   leaflet (>= 2.0.0),
   sp
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2

@@ -2,6 +2,7 @@
 % Please edit documentation in R/leafpop-package.R
 \docType{package}
 \name{leafpop-package}
+\alias{leafpop}
 \alias{leafpop-package}
 \title{Include Tables, Images and Graphs in Leaflet Popups}
 \description{
@@ -13,6 +14,14 @@ of interactive maps created with packages 'leaflet' or 'mapview'. Handles
 local paths to images on the file system or remote urls. Handles graphs created
 with 'base' graphics, 'lattice' or 'ggplot2' as well as interactive plots created
 with 'htmlwidgets'.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/r-spatial/leafpop}
+  \item Report bugs at \url{https://github.com/r-spatial/leafpop/issues}
+}
+
 }
 \author{
 Tim Appelhans, Florian Detsch

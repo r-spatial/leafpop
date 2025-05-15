@@ -5,7 +5,7 @@
 #' \code{mapview} or \code{leaflet}.
 #' This optionally allows the user to include only a subset of feature attributes.
 #'
-#' @param x A \code{Spatial*} object.
+#' @param x A \code{data.frame}, \code{sf}, \code{SpatVector} or \code{Spatial*} object.
 #' @param zcol \code{numeric} or \code{character} vector indicating the columns
 #' included in the output popup table. If missing, all columns are displayed.
 #' @param row.numbers \code{logical} whether to include row numbers in the popup table.

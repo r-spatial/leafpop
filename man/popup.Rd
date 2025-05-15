@@ -11,6 +11,7 @@ popupGraph(
   type = c("png", "svg", "html"),
   width = 300,
   height = 300,
+  selfcontained = TRUE,
   ...
 )
 
@@ -26,6 +27,8 @@ popupTable(x, zcol, row.numbers = TRUE, feature.id = TRUE, className = NULL)
 \item{width}{popup width in pixels.}
 
 \item{height}{popup height in pixels.}
+
+\item{selfcontained}{Whether to save the HTML as a single self-contained file (with external resources base64 encoded) or a file with external resources placed in an adjacent directory. Only for filetype "html"}
 
 \item{...}{further arguments passed on to underlying methods such as
 height and width.}
