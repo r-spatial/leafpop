@@ -41,7 +41,7 @@ base64 ecoded. Set this to TRUE if you want to save and share your map, unless
 you want render many images, then set to FALSE and make sure to copy ../graphs
 when copying the map to a different location.}
 
-\item{x}{A \code{Spatial*} object.}
+\item{x}{A \code{data.frame}, \code{sf}, \code{SpatVector} or \code{Spatial*} object.}
 
 \item{zcol}{\code{numeric} or \code{character} vector indicating the columns
 included in the output popup table. If missing, all columns are displayed.}
